@@ -44,9 +44,10 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/LongLat'
+                $ref: '#/components/schemas/LongLat'
+              example:
+                  long: 107.5758500037501
+                  lat: -6.874720427234501
         '400':
           description: Invalid status value
   /petapedia-post:
