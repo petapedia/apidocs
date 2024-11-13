@@ -115,6 +115,9 @@ components:
       required:
         - long
         - lat
+      example:
+        long: 107.5758500037501
+        lat: -6.874720427234501
     Peta:
       type: object
       properties:
