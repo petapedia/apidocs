@@ -37,6 +37,8 @@ paths:
         - data
       summary: Get Data Region
       description: Desa/Kelurahan Kecamatan Kabupaten Provinsi
+      security:
+        - token: []
       operationId: getGeoJSON
       requestBody:
         required: true
@@ -186,5 +188,5 @@ components:
   securitySchemes:
     token:
       type: apiKey
-      name: token
+      name: Login
       in: header
