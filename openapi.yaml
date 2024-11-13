@@ -55,12 +55,7 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/LongLat'
-              example:
-                  long: 107.5758500037501
-                  lat: -6.874720427234501
+                $ref: '#/components/schemas/DataRegionResponse'
         '400':
           description: Invalid status value
   /petapedia-post:
@@ -115,6 +110,46 @@ paths:
             - read:apiKey
 components:
   schemas:
+    DataRegionResponse:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: "Unique identifier of the region"
+          example: "63953e66f1e587f3f9b30ab2"
+        province:
+          type: string
+          description: "Name of the province"
+          example: "JAWA BARAT"
+        district:
+          type: string
+          description: "Name of the district"
+          example: "KOTA BANDUNG"
+        sub_district:
+          type: string
+          description: "Name of the sub-district"
+          example: "SUKASARI"
+        village:
+          type: string
+          description: "Name of the village"
+          example: "SARIJADI"
+        border:
+          type: object
+          properties:
+            type:
+              type: string
+              description: "Type of the geographical shape"
+              example: "Polygon"
+            coordinates:
+              type: array
+              description: "Coordinates of the polygon points"
+              items:
+                type: array
+                items:
+                  type: number
+                  format: float
+                  description: "Longitude and latitude coordinate"
+                example: [107.582, -6.8683]
     LongLat:
       type: object
       properties:
