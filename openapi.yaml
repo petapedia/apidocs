@@ -16,7 +16,7 @@ externalDocs:
   description: Repo GCF
   url: https://petapedia.github.io/gcf/
 servers:
-  - url: https://asia-southeast2-awangga.cloudfunctions.net
+  - url: https://asia-southeast2-awangga.cloudfunctions.net/petabackend
 tags:
   - name: data
     description: Data Geo Spasial
@@ -31,12 +31,12 @@ tags:
   - name: user
     description: Get Token and Authorize
 paths:
-  /petapedia:
-    get:
+  /data/gis/lokasi:
+    post:
       tags:
         - data
-      summary: Get Data Geospasial
-      description: List Data Geospasial
+      summary: Get Data Region
+      description: Desa/Kelurahan Kecamatan Kabupaten Provinsi
       operationId: getGeoJSON
       responses:
         '200':
@@ -46,7 +46,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Peta'
+                  $ref: '#/components/schemas/LongLat'
         '400':
           description: Invalid status value
   /petapedia-post:
@@ -101,6 +101,20 @@ paths:
             - read:apiKey
 components:
   schemas:
+    LongLat:
+      type: object
+      properties:
+        long:
+          type: number
+          format: float
+          description: "Longitude coordinate"
+        lat:
+          type: number
+          format: float
+          description: "Latitude coordinate"
+      required:
+        - long
+        - lat
     Peta:
       type: object
       properties:
