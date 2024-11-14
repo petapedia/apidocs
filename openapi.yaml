@@ -58,6 +58,35 @@ paths:
                 $ref: '#/components/schemas/DataRegionResponse'
         '400':
           description: Invalid status value
+  /data/gis/jalan:
+    post:
+      tags:
+        - data
+      summary: Get Data Roads
+      description: Mendapatkan jalan di sekitar titik
+      security:
+        - token: []
+      operationId: getGeoJSON
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LongLat'
+            example:
+              long: 107.5758500037501
+              lat: -6.874720427234501
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Roads'
+        '400':
+          description: Invalid status value
   /petapedia-post:
     post:
       tags:
@@ -110,6 +139,51 @@ paths:
             - read:apiKey
 components:
   schemas:
+    Roads:
+      type: object
+      properties:
+        _id:
+          type: string
+          format: objectId
+          description: Unique identifier of the feature
+        type:
+          type: string
+          example: "Feature"
+        geometry:
+          $ref: '#/components/schemas/Geometry'
+        properties:
+          $ref: '#/components/schemas/Properties'
+    Geometry:
+      type: object
+      properties:
+        type:
+          type: string
+          example: "LineString"
+        coordinates:
+          type: array
+          items:
+            type: array
+            items:
+              type: number
+              format: float
+            minItems: 2
+            maxItems: 2
+          description: Array of [longitude, latitude] coordinate pairs
+    Properties:
+      type: object
+      properties:
+        osm_id:
+          type: integer
+          description: OSM ID of the feature
+          example: 182556785
+        name:
+          type: string
+          description: Name of the feature
+          example: "Jalan Lintas Selatan"
+        highway:
+          type: string
+          description: Type of highway
+          example: "secondary"
     DataRegionResponse:
       type: object
       properties:
