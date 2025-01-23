@@ -114,6 +114,35 @@ paths:
                   $ref: '#/components/schemas/Roads'
         '400':
           description: Invalid status value
+  /data/geojson/jalandalamlokasi:
+    post:
+      tags:
+        - data
+      summary: Get Data Roads
+      description: Mendapatkan jalan di dalam kelurahan sekitar titik format GeoJSON.io
+      security:
+        - token: []
+      operationId: getGeoJSON
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LongLat'
+            example:
+              long: 107.5758500037501
+              lat: -6.874720427234501
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Roads'
+        '400':
+          description: Invalid status value
   /petapedia-post:
     post:
       tags:
