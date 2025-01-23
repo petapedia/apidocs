@@ -1,10 +1,8 @@
 openapi: 3.0.3
 info:
-  title: Dokumen API Cloud Function - OpenAPI 3.0
+  title: Dokumen API Peta Pedia
   description: >-
-    Jelaskan disini apa saja yang perlu dijelaskan
-    termasuk informasi yang diperlukan untuk dinilai
-    term of service isi dari link repo dari swagger ini
+    API Akses Petapedia dengan menggunakan token WhatsAuth
   termsOfService: https://github.com/jscroot/examples/tree/main/api/swagger
   contact:
     email: awangga@gmail.com
@@ -64,6 +62,35 @@ paths:
         - data
       summary: Get Data Roads
       description: Mendapatkan jalan di sekitar titik
+      security:
+        - token: []
+      operationId: getGeoJSON
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LongLat'
+            example:
+              long: 107.5758500037501
+              lat: -6.874720427234501
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Roads'
+        '400':
+          description: Invalid status value
+  /data/geojson/jalan:
+    post:
+      tags:
+        - data
+      summary: Get Data Roads
+      description: Mendapatkan jalan di sekitar titik format GeoJSON.io
       security:
         - token: []
       operationId: getGeoJSON
